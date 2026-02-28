@@ -1,19 +1,22 @@
 # Interactive Cavity Mode Viewer
 
 ## Python Version
+
 Execute `cavity-mode-display.py`
 
 ### Requirements
+
 - numpy
 - matplotlib
 - PyQt6
 
-
 ## Browser App
+
 It can be accessed here:
-```
+
+```text
 https://avkgithub1.github.io/CavityModeViewer
-``` 
+```
 
 The repository includes a static browser version of the cavity viewer:
 
@@ -22,8 +25,8 @@ The repository includes a static browser version of the cavity viewer:
 - `app.js`
 - `.nojekyll`
 
-
 ### Use Locally
+
 Open `index.html` in a browser for a quick check, or serve the folder locally:
 
 ```powershell
