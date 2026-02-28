@@ -1,22 +1,10 @@
 # Interactive Cavity Mode Viewer
 
-## Python Version
-
-Execute `cavity-mode-display.py`
-
-### Requirements
-
-- numpy
-- matplotlib
-- PyQt6
-
 ## Browser App
 
 It can be accessed here:
 
-```text
-https://avkgithub1.github.io/CavityModeViewer
-```
+[https://avkgithub1.github.io/CavityModeViewer](https://avkgithub1.github.io/CavityModeViewer)
 
 The repository includes a static browser version of the cavity viewer:
 
@@ -50,3 +38,13 @@ For a project repository, the site URL is typically:
 ```text
 https://<your-github-username>.github.io/<repository-name>/
 ```
+
+## Python Version
+
+Execute `cavity-mode-display.py`
+
+### Requirements
+
+- numpy
+- matplotlib
+- PyQt6
