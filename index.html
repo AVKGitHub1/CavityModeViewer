@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fabry-Perot Cavity Viewer</title>
+    <meta
+      name="description"
+      content="Interactive Fabry-Perot cavity browser app for visualizing Gaussian cavity modes and the g1-g2 stability diagram."
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <h1>Interactive Cavity Mode Viewer</h1>
+        <!-- <p class="hero-copy">
+          Placeholder
+        </p> -->
+      </header>
+
+      <main class="app-grid">
+        <article class="plot-card profile-card">
+          <div class="plot-header">
+            <h2>Cavity Mode Profile</h2>
+            <p id="profileStatus" class="plot-subtitle"></p>
+          </div>
+          <canvas id="profileCanvas" class="plot-canvas" aria-label="Cavity mode profile plot"></canvas>
+        </article>
+
+        <article class="plot-card stability-card">
+          <div class="plot-header">
+            <h2>Cavity Stability Diagram</h2>
+            <p id="stabilityStatus" class="plot-subtitle"></p>
+          </div>
+          <canvas id="stabilityCanvas" class="plot-canvas" aria-label="Cavity stability diagram"></canvas>
+        </article>
+
+        <section class="panel-card geometry-card">
+          <div class="panel-heading">
+            <h2>Geometry [mm]</h2>
+            <button id="resetButton" class="ghost-button" type="button">Reset defaults</button>
+          </div>
+          <div id="geometryControls" class="control-stack"></div>
+        </section>
+
+        <section class="panel-card optics-card">
+          <div class="panel-heading">
+            <h2>Optics and Display</h2>
+          </div>
+          <div id="opticsControls" class="control-stack"></div>
+        </section>
+
+        <aside class="panel-card summary-card">
+          <div class="panel-heading">
+            <h2>Current State</h2>
+          </div>
+          <dl id="summaryGrid" class="summary-grid"></dl>
+        </aside>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

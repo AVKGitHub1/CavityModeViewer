@@ -1,0 +1,295 @@
+:root {
+  --bg-top: #fff8ee;
+  --bg-bottom: #edf4ff;
+  --card: rgba(255, 255, 255, 0.88);
+  --card-border: rgba(125, 146, 173, 0.22);
+  --ink: #1f2933;
+  --muted: #5e6d7d;
+  --accent: #285ec7;
+  --accent-strong: #1c489a;
+  --track: #dce5f3;
+  --shadow: 0 22px 60px rgba(49, 70, 103, 0.14);
+  --warm: #fff3c5;
+  --cool: #e7f1ff;
+  --danger: #b33f3f;
+  --success: #267246;
+  --panel-radius: 22px;
+  --font-ui: "Segoe UI", "Avenir Next", "Helvetica Neue", sans-serif;
+  --font-display: Georgia, "Times New Roman", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(255, 214, 167, 0.45), transparent 32%),
+    radial-gradient(circle at top right, rgba(148, 198, 255, 0.28), transparent 28%),
+    linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+  font-family: var(--font-ui);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.22) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.28), transparent 92%);
+}
+
+.page-shell {
+  width: min(1420px, calc(100vw - 20px));
+  margin: 0 auto;
+  padding: 12px 0 16px;
+}
+
+.hero {
+  padding: 4px 4px 10px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.76rem;
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+
+.hero h1 {
+  margin: 0;
+  max-width: 14ch;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4.6rem);
+  line-height: 0.96;
+  font-weight: 700;
+}
+
+.hero-copy {
+  max-width: 68ch;
+  margin: 16px 0 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(300px, 360px);
+  grid-template-areas:
+    "profile stability summary"
+    "geometry optics summary";
+  gap: 12px;
+  align-items: start;
+}
+
+.panel-card,
+.plot-card {
+  border: 1px solid var(--card-border);
+  border-radius: var(--panel-radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.panel-card {
+  padding: 14px 14px 12px;
+}
+
+.profile-card {
+  grid-area: profile;
+}
+
+.stability-card {
+  grid-area: stability;
+}
+
+.geometry-card {
+  grid-area: geometry;
+}
+
+.optics-card {
+  grid-area: optics;
+}
+
+.summary-card {
+  grid-area: summary;
+  align-self: stretch;
+}
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.panel-heading h2,
+.plot-header h2 {
+  margin: 0;
+  font-size: 1.02rem;
+}
+
+.control-stack {
+  display: grid;
+  gap: 10px;
+}
+
+.control-row {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr) 96px;
+  gap: 12px;
+  align-items: center;
+  padding: 9px 10px;
+  border-radius: 16px;
+  background: rgba(248, 250, 254, 0.92);
+  border: 1px solid rgba(199, 212, 230, 0.62);
+}
+
+.control-label {
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.control-row input[type="range"] {
+  width: 100%;
+  height: 30px;
+  margin: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.control-row input[type="number"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #cad5e6;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+}
+
+.ghost-button {
+  padding: 7px 10px;
+  border: 1px solid rgba(40, 94, 199, 0.22);
+  border-radius: 999px;
+  background: rgba(40, 94, 199, 0.08);
+  color: var(--accent-strong);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ghost-button:hover {
+  background: rgba(40, 94, 199, 0.14);
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.summary-grid div {
+  padding: 8px 10px;
+  border-radius: 14px;
+  background: rgba(249, 250, 253, 0.96);
+  border: 1px solid rgba(199, 212, 230, 0.58);
+}
+
+.summary-grid dt {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.summary-grid dd {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.plot-card {
+  padding: 12px 12px 10px;
+}
+
+.plot-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.plot-subtitle {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.plot-canvas {
+  width: 100%;
+  height: 320px;
+  display: block;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(248, 250, 254, 0.96));
+  border: 1px solid rgba(201, 214, 232, 0.82);
+}
+
+@media (max-width: 1024px) {
+  .app-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "profile stability"
+      "geometry optics"
+      "summary summary";
+  }
+
+  .hero h1 {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 720px) {
+  .page-shell {
+    width: min(100vw - 12px, 1500px);
+    padding-top: 10px;
+  }
+
+  .app-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "profile"
+      "stability"
+      "geometry"
+      "optics"
+      "summary";
+  }
+
+  .control-row {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .plot-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .plot-canvas {
+    height: 260px;
+  }
+}
