@@ -549,6 +549,60 @@ function drawStar(ctx, cx, cy, radius, color) {
   ctx.restore();
 }
 
+function traceHyperbolaBranch(ctx, mapX, mapY, xStart, xEnd, samples) {
+  for (let i = 0; i <= samples; i += 1) {
+    const t = i / samples;
+    const x = xStart + (xEnd - xStart) * t;
+    const y = 1 / x;
+    ctx.lineTo(mapX(x), mapY(y));
+  }
+}
+
+function fillStabilityRegions(ctx, mapX, mapY, bounds, colors, samples) {
+  const { xMin, xMax, yMin, yMax } = bounds;
+  const { unstable, stable } = colors;
+  const positiveTurn = Math.min(xMax, Math.max(0, 1 / yMax));
+  const negativeTurn = Math.max(xMin, Math.min(0, 1 / yMin));
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(mapX(xMin), mapY(yMax), mapX(xMax) - mapX(xMin), mapY(yMin) - mapY(yMax));
+  ctx.clip();
+
+  ctx.fillStyle = unstable;
+  ctx.fillRect(mapX(xMin), mapY(yMax), mapX(xMax) - mapX(xMin), mapY(yMin) - mapY(yMax));
+
+  ctx.fillStyle = stable;
+
+  ctx.beginPath();
+  ctx.moveTo(mapX(0), mapY(0));
+  ctx.lineTo(mapX(0), mapY(yMax));
+  if (positiveTurn >= xMax) {
+    ctx.lineTo(mapX(xMax), mapY(yMax));
+  } else {
+    ctx.lineTo(mapX(positiveTurn), mapY(yMax));
+    traceHyperbolaBranch(ctx, mapX, mapY, positiveTurn, xMax, samples);
+  }
+  ctx.lineTo(mapX(xMax), mapY(0));
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(mapX(0), mapY(0));
+  ctx.lineTo(mapX(0), mapY(yMin));
+  if (negativeTurn <= xMin) {
+    ctx.lineTo(mapX(xMin), mapY(yMin));
+  } else {
+    ctx.lineTo(mapX(negativeTurn), mapY(yMin));
+    traceHyperbolaBranch(ctx, mapX, mapY, negativeTurn, xMin, samples);
+  }
+  ctx.lineTo(mapX(xMin), mapY(0));
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.restore();
+}
+
 function drawStabilityPlot(g1, g2) {
   const { ctx, width, height } = setupCanvas(stabilityCanvas);
   ctx.clearRect(0, 0, width, height);
@@ -567,20 +621,14 @@ function drawStabilityPlot(g1, g2) {
   ctx.fillStyle = "#ffffff";
   ctx.fillRect(0, 0, width, height);
 
-  const bg = ctx.createImageData(Math.max(1, Math.round(plotW)), Math.max(1, Math.round(plotH)));
-  for (let py = 0; py < bg.height; py += 1) {
-    const gy = yMax - ((py + 0.5) / bg.height) * (yMax - yMin);
-    for (let px = 0; px < bg.width; px += 1) {
-      const gx = xMin + ((px + 0.5) / bg.width) * (xMax - xMin);
-      const stable = gx * gy >= 0 && gx * gy <= 1;
-      const index = (py * bg.width + px) * 4;
-      bg.data[index] = stable ? 213 : 255;
-      bg.data[index + 1] = stable ? 239 : 214;
-      bg.data[index + 2] = stable ? 213 : 214;
-      bg.data[index + 3] = 255;
-    }
-  }
-  ctx.putImageData(bg, margin.left, margin.top);
+  fillStabilityRegions(
+    ctx,
+    mapX,
+    mapY,
+    { xMin, xMax, yMin, yMax },
+    { unstable: "#ffd6d6", stable: "#d5efd5" },
+    Math.max(120, Math.round(plotW * 0.6)),
+  );
 
   ctx.strokeStyle = "rgba(90, 112, 138, 0.18)";
   ctx.lineWidth = 1;
