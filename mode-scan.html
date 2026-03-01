@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fabry-Perot Mode Scan</title>
+    <meta
+      name="description"
+      content="Mode-matching view for the Fabry-Perot cavity browser app with cavity transmission scans and camera intensity."
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="mode-page">
+    <div class="page-shell mode-shell">
+      <header class="hero hero-slim">
+        <p class="eyebrow">Coupling View</p>
+        <div class="hero-bar">
+          <div>
+            <h1>Mode Matching and Scan</h1>
+            <!-- <p class="hero-copy">
+              Uses the current cavity geometry, initializes the beam to the matched cavity mode at mirror 1,
+              and lets you scan offsets, waist, ROC, and transverse-order cutoff.
+            </p> -->
+          </div>
+          <div class="hero-actions">
+            <a id="backToViewerLink" class="ghost-button link-button" href="index.html">Back to viewer</a>
+            <button id="matchBeamButton" class="primary-button" type="button">Match cavity mode</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="mode-grid">
+        <article class="plot-card camera-card">
+          <div class="plot-header">
+            <h2>Camera Intensity</h2>
+            <p id="cameraStatus" class="plot-subtitle"></p>
+          </div>
+          <canvas id="cameraCanvas" class="plot-canvas plot-canvas-tall" aria-label="Cavity camera intensity"></canvas>
+        </article>
+
+        <article class="plot-card scan-card">
+          <div class="plot-header">
+            <h2>Transmission Scan</h2>
+            <p id="scanStatus" class="plot-subtitle"></p>
+          </div>
+          <canvas id="scanCanvas" class="plot-canvas plot-canvas-tall" aria-label="Cavity transmission scan"></canvas>
+        </article>
+
+        <section class="panel-card controls-card">
+          <div class="panel-heading">
+            <h2>Beam and Scan Controls</h2>
+            <p id="modeSimStatus" class="panel-status"></p>
+          </div>
+          <div id="simControls" class="control-stack"></div>
+        </section>
+
+        <aside class="panel-card mode-summary-card">
+          <div class="panel-heading">
+            <h2>Cavity Carry-Over</h2>
+          </div>
+          <dl id="simSummary" class="summary-grid"></dl>
+        </aside>
+      </main>
+    </div>
+
+    <script src="cavity-core.js"></script>
+    <script src="mode-scan.js"></script>
+  </body>
+</html>
