@@ -58,13 +58,15 @@ Recommended flow:
 
 ### Publish to GitHub Pages
 
-1. Commit and push the new web files to your GitHub repository.
-2. On GitHub, open the repository and go to `Settings` > `Pages`.
-3. In `Build and deployment`, set `Source` to `Deploy from a branch`.
-4. Select your publishing branch, usually `main`, and choose the `/(root)` folder.
-5. Save and wait for GitHub Pages to finish the deployment.
+This repo now includes a GitHub Actions workflow at `.github/workflows/deploy-pages.yml`.
 
-Because this repo now has a `.nojekyll` file, GitHub Pages can deploy the static files directly from the branch root without trying to run Jekyll.
+1. Push the repository to GitHub.
+2. In GitHub, open `Settings` > `Pages`.
+3. Set `Source` to `GitHub Actions`.
+4. Push to `main`, or run the workflow manually from the `Actions` tab.
+
+The workflow uploads the repository root as a static site and deploys it to GitHub Pages automatically.
+The `.nojekyll` file is kept so GitHub Pages serves the static files directly without trying to run Jekyll.
 
 For a project repository, the site URL is typically:
 
