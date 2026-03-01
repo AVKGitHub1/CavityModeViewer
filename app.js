@@ -44,6 +44,14 @@ const stabilityCanvas = document.getElementById("stabilityCanvas");
 const resetButton = document.getElementById("resetButton");
 const openModeScanButton = document.getElementById("openModeScanButton");
 
+function applyInitialStateFromUrl() {
+  if (window.location.search) {
+    Object.assign(state, DEFAULT_STATE, readCavityStateFromSearch(window.location.search));
+    return;
+  }
+  Object.assign(state, DEFAULT_STATE);
+}
+
 function createCenteredControl(def) {
   const row = document.createElement("div");
   row.className = "control-row";
@@ -60,8 +68,6 @@ function createCenteredControl(def) {
 
   const number = document.createElement("input");
   number.type = "number";
-  number.min = String(def.min);
-  number.max = String(def.max);
   number.step = String(def.step);
 
   row.append(label, slider, number);
@@ -84,7 +90,6 @@ function createCenteredControl(def) {
     render();
   };
 
-  number.addEventListener("input", handleNumberEdit);
   number.addEventListener("change", handleNumberEdit);
 
   syncCenteredControl(def.key);
@@ -106,8 +111,6 @@ function createLinearControl(def) {
 
   const number = document.createElement("input");
   number.type = "number";
-  number.min = String(def.min);
-  number.max = String(def.max);
   number.step = String(def.step);
 
   row.append(label, slider, number);
@@ -130,7 +133,6 @@ function createLinearControl(def) {
     render();
   };
 
-  number.addEventListener("input", handleNumberEdit);
   number.addEventListener("change", handleNumberEdit);
 
   syncLinearControl(def.key);
@@ -679,6 +681,9 @@ function render() {
 
 function resetDefaults() {
   Object.assign(state, DEFAULT_STATE);
+  if (window.location.search) {
+    window.history.replaceState(null, "", window.location.pathname);
+  }
   geometryDefs.forEach((def) => syncCenteredControl(def.key));
   opticsDefs.forEach((def) => syncLinearControl(def.key));
   render();
@@ -689,10 +694,19 @@ function openModeScan() {
 }
 
 function init() {
+  applyInitialStateFromUrl();
   geometryDefs.forEach(createCenteredControl);
   opticsDefs.forEach(createLinearControl);
   resetButton.addEventListener("click", resetDefaults);
   openModeScanButton.addEventListener("click", openModeScan);
+  window.addEventListener("pageshow", () => {
+    if (!window.location.search) {
+      applyInitialStateFromUrl();
+      geometryDefs.forEach((def) => syncCenteredControl(def.key));
+      opticsDefs.forEach((def) => syncLinearControl(def.key));
+      render();
+    }
+  });
   window.addEventListener("resize", render);
   render();
 }

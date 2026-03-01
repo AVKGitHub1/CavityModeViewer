@@ -784,8 +784,6 @@ function createControl(def) {
 
   const number = document.createElement("input");
   number.type = "number";
-  number.min = String(def.min);
-  number.max = String(def.max);
   number.step = String(def.step);
 
   row.append(label, slider, number);
@@ -807,7 +805,6 @@ function createControl(def) {
     scheduleRender();
   };
 
-  number.addEventListener("input", handleNumberEdit);
   number.addEventListener("change", handleNumberEdit);
 
   syncControl(def.key);

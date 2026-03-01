@@ -4,7 +4,7 @@
   const DEFAULT_CAVITY_STATE = Object.freeze({
     r1Mm: 50,
     r2Mm: 50,
-    lMm: 40,
+    lMm: 25,
     wavelengthNm: 780,
     nCenter: 1.0,
   });
