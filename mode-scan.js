@@ -12,7 +12,7 @@ const {
 const SIM_DEFS = [
   { key: "xOffUm", label: "x offset", min: 0, max: 1000, step: 1, digits: 0, unit: "um" },
   { key: "yOffUm", label: "y offset", min: 0, max: 1000, step: 1, digits: 0, unit: "um" },
-  { key: "scanRangeFsr", label: "Scan range", min: 1, max: 5, step: 0.1, digits: 1, unit: "FSR" },
+  { key: "scanRangeFsr", label: "Scan range", min: 1, max: 5, step: 1, digits: 0, unit: "FSR" },
   { key: "nMax", label: "Max HG order", min: 1, max: 15, step: 1, digits: 0, unit: "" },
   { key: "beamWaistMm", label: "Input waist", min: 0.005, max: 5.0, step: 0.001, digits: 3, unit: "mm" },
   { key: "beamRocMm", label: "Input ROC", min: 1, max: 2000, step: 1, digits: 0, unit: "mm" },

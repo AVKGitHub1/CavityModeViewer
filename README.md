@@ -33,7 +33,7 @@ The browser app has two linked views:
    - cavity transmission scan
    - input beam waist and ROC
    - `x` and `y` offsets from `0` to `1 mm` with `1 um` step
-   - scan range in `FSR`
+   - scan range in `FSR` from `1` to `5` with step `1`
    - `Max HG order` to set maximum order of the simulated Hermite-Gauss mode
 
 The `Open mode scan` button on the main viewer passes the current cavity parameters to the scan page.
