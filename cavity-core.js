@@ -12,7 +12,7 @@
   const CAVITY_LIMITS = Object.freeze({
     r1Mm: { min: 1, max: 1000 },
     r2Mm: { min: 1, max: 1000 },
-    lMm: { min: 1, max: 1000 },
+    lMm: { min: 0, max: 1000 },
     wavelengthNm: { min: 400, max: 2000 },
     nCenter: { min: 1.0, max: 3.0 },
   });
@@ -79,8 +79,11 @@
     if (r1 <= 0 || r2 <= 0) {
       throw new Error("Mirror ROC must be positive.");
     }
-    if (length <= 0) {
-      throw new Error("Cavity length must be positive.");
+    if (length < 0) {
+      throw new Error("Cavity length cannot be negative.");
+    }
+    if (length === 0) {
+      throw new Error("Zero-length cavity is not supported.");
     }
     if (nCenter <= 0) {
       throw new Error("Center refractive index must be positive.");

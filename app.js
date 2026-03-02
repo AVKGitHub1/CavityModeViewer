@@ -18,7 +18,7 @@ const DEFAULT_STATE = {
 const geometryDefs = [
   { key: "r1Mm", label: "R1", min: 1, max: 1000, step: 1, unit: "mm" },
   { key: "r2Mm", label: "R2", min: 1, max: 1000, step: 1, unit: "mm" },
-  { key: "lMm", label: "Length L", min: 1, max: 1000, step: 1, unit: "mm" },
+  { key: "lMm", label: "Length L", min: 0, max: 1000, step: 0.01, unit: "mm" },
 ];
 
 const opticsDefs = [
@@ -141,7 +141,10 @@ function createLinearControl(def) {
 function syncCenteredControl(key) {
   const control = centeredControlState.get(key);
   const def = geometryDefs.find((item) => item.key === key);
-  const value = clamp(Math.round(state[key]), def.min, def.max);
+  const isInteger = def.step === 1;
+  const value = isInteger
+    ? clamp(Math.round(state[key]), def.min, def.max)
+    : clamp(state[key], def.min, def.max);
   state[key] = value;
   control.slider.min = String(def.min);
   control.slider.max = String(def.max);
@@ -623,7 +626,7 @@ function updateSummary(mode, errorText, g1, g2) {
   const rows = [
     ["R1", `${state.r1Mm.toFixed(0)} mm`],
     ["R2", `${state.r2Mm.toFixed(0)} mm`],
-    ["Length", `${state.lMm.toFixed(0)} mm`],
+    ["Length", `${formatNumber(state.lMm, 2)} mm`],
     ["Wavelength", `${state.wavelengthNm.toFixed(0)} nm`],
     ["g1", formatNumber(g1, 4)],
     ["g2", formatNumber(g2, 4)],
