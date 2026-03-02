@@ -10,8 +10,8 @@
   });
 
   const CAVITY_LIMITS = Object.freeze({
-    r1Mm: { min: 1, max: 1000 },
-    r2Mm: { min: 1, max: 1000 },
+    r1Mm: { min: 0, max: 1000 },
+    r2Mm: { min: 0, max: 1000 },
     lMm: { min: 0, max: 1000 },
     wavelengthNm: { min: 400, max: 2000 },
     nCenter: { min: 1.0, max: 3.0 },

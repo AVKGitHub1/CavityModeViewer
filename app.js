@@ -16,8 +16,8 @@ const DEFAULT_STATE = {
 };
 
 const geometryDefs = [
-  { key: "r1Mm", label: "R1", min: 1, max: 1000, step: 1, unit: "mm" },
-  { key: "r2Mm", label: "R2", min: 1, max: 1000, step: 1, unit: "mm" },
+  { key: "r1Mm", label: "R1", min: 0, max: 1000, step: 0.01, unit: "mm" },
+  { key: "r2Mm", label: "R2", min: 0, max: 1000, step: 0.01, unit: "mm" },
   { key: "lMm", label: "Length L", min: 0, max: 1000, step: 0.01, unit: "mm" },
 ];
 
@@ -624,8 +624,8 @@ function drawStabilityPlot(g1, g2) {
 
 function updateSummary(mode, errorText, g1, g2) {
   const rows = [
-    ["R1", `${state.r1Mm.toFixed(0)} mm`],
-    ["R2", `${state.r2Mm.toFixed(0)} mm`],
+    ["R1", `${formatNumber(state.r1Mm, 2)} mm`],
+    ["R2", `${formatNumber(state.r2Mm, 2)} mm`],
     ["Length", `${formatNumber(state.lMm, 2)} mm`],
     ["Wavelength", `${state.wavelengthNm.toFixed(0)} nm`],
     ["g1", formatNumber(g1, 4)],

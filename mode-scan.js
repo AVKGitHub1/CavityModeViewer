@@ -719,8 +719,8 @@ function updateSummary(simulationResult) {
   const [statusText] = stabilityLabel(cavityMode ? cavityMode.g1 : NaN, cavityMode ? cavityMode.g2 : NaN);
   const matched = matchedBeamDefaults();
   const rows = [
-    ["R1", `${formatNumber(cavityState.r1Mm, 0)} mm`],
-    ["R2", `${formatNumber(cavityState.r2Mm, 0)} mm`],
+    ["R1", `${formatNumber(cavityState.r1Mm, 2)} mm`],
+    ["R2", `${formatNumber(cavityState.r2Mm, 2)} mm`],
     ["Length", `${formatNumber(cavityState.lMm, 2)} mm`],
     ["Wavelength", `${formatNumber(cavityState.wavelengthNm, 0)} nm`],
     ["n_center", formatNumber(cavityState.nCenter, 2)],
